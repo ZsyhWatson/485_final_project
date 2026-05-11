@@ -1,0 +1,24 @@
+source,target,transform
+ecommerce_events.event_time,fact_event.event_time,+ CHECK <= NOW() + 5 min
+ecommerce_events.event_type,dim_event_type.event_type_code + fact_event.event_type_code,"free-text → FK lookup, ENUM-checked"
+ecommerce_events.product_id,product.product_id + fact_event.product_id,FK enforced; product master table added
+ecommerce_events.category_id,dim_category.rees46_category_id,preserved as rees46_category_id
+ecommerce_events.category_code,dim_category (1..N rows) + product.category_id,dot-delimited string → normalised hierarchy with parent_id
+ecommerce_events.brand,dim_brand + product.brand_id,REMOVED from fact_event; FK in product master
+ecommerce_events.price,fact_event.price_at_event + product_price_history.price,SCD-2 price history; CHECK >= 0
+ecommerce_events.user_id,user.user_id + fact_event.user_id,user master table added; FK enforced
+ecommerce_events.user_session,dim_session.session_uuid + fact_event.session_uuid,"promoted to real entity with started_at, last_event_at, n_events"
+user_location.user_id,user.user_id,FK enforced
+user_location.zip,user_address.zip5 + dim_zip.zip5,split into SCD-2 address + ZIP dim; format CHECK ^[0-9]{5}$
+user_location.pct_minority,ref_census_acs.pct_black + pct_hispanic,derived inside the audit view; not stored on user
+user_location.median_income,ref_census_acs.median_hh_income,sourced from ACS
+(none),fact_event.event_id,NEW — synthetic surrogate PK
+(none),fact_event.event_hash,NEW — sha256 idempotency key for dedup
+(none),recommendation_event,"NEW — what the model emitted, with model_version_id, rank, score"
+(none),ml_feature_snapshot,NEW — feature audit trail; CHECK no_geo_features
+(none),dim_model_version,NEW — one row per deployed model
+(none),consent_event,NEW — immutable consent log per user
+(none),fairness_metric,NEW — nightly DI ratio per model_version
+(none),dq_rule + dq_violation,NEW — DQ check catalogue and offenders
+(none),audit_log,"NEW — PII access, demographic joins, model deploys"
+(none),data_lineage,NEW — source-to-target lineage tracking
