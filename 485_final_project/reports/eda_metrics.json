@@ -1,0 +1,172 @@
+{
+  "profiles": {
+    "events": {
+      "table": "ecommerce_events",
+      "n_rows": 502500,
+      "columns": [
+        {
+          "column": "event_time",
+          "dtype": "datetime64[us, UTC]",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 454679
+        },
+        {
+          "column": "event_type",
+          "dtype": "str",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 4
+        },
+        {
+          "column": "product_id",
+          "dtype": "int64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 4000,
+          "min": 1000000.0,
+          "max": 1003999.0,
+          "mean": 1001991.65
+        },
+        {
+          "column": "category_id",
+          "dtype": "int64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 18,
+          "min": 2085945638.0,
+          "max": 2975622350.0,
+          "mean": 2544091361.43
+        },
+        {
+          "column": "category_code",
+          "dtype": "str",
+          "n_null": 150733,
+          "pct_null": 30.0,
+          "n_unique": 18
+        },
+        {
+          "column": "brand",
+          "dtype": "str",
+          "n_null": 75346,
+          "pct_null": 14.99,
+          "n_unique": 19
+        },
+        {
+          "column": "price",
+          "dtype": "float64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 3640,
+          "min": -1.0,
+          "max": 2245.77,
+          "mean": 168.13
+        },
+        {
+          "column": "user_id",
+          "dtype": "int64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 29994,
+          "min": 500001316.0,
+          "max": 599998248.0,
+          "mean": 550161894.85
+        },
+        {
+          "column": "user_session",
+          "dtype": "str",
+          "n_null": 502,
+          "pct_null": 0.1,
+          "n_unique": 62483
+        }
+      ]
+    },
+    "user_location": {
+      "table": "user_location",
+      "n_rows": 30000,
+      "columns": [
+        {
+          "column": "user_id",
+          "dtype": "int64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 29994,
+          "min": 500001316.0,
+          "max": 599998248.0,
+          "mean": 550112981.72
+        },
+        {
+          "column": "zip",
+          "dtype": "int64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 12,
+          "min": 10021.0,
+          "max": 90210.0,
+          "mean": 58502.91
+        },
+        {
+          "column": "pct_minority",
+          "dtype": "float64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 12,
+          "min": 0.15,
+          "max": 0.95,
+          "mean": 0.53
+        },
+        {
+          "column": "median_income",
+          "dtype": "int64",
+          "n_null": 0,
+          "pct_null": 0.0,
+          "n_unique": 12,
+          "min": 31000.0,
+          "max": 210000.0,
+          "mean": 94971.0
+        }
+      ]
+    }
+  },
+  "funnel_overall": {
+    "view": 477116,
+    "cart": 13654,
+    "purchase": 6693,
+    "view\u2192cart": 0.0286,
+    "cart\u2192purchase": 0.4902,
+    "view\u2192purchase (CR)": 0.014
+  },
+  "exposure_by_tier": [
+    {
+      "minority_tier": "low(<30%)",
+      "count": 236986,
+      "mean": 146.84,
+      "median": 80.14
+    },
+    {
+      "minority_tier": "high(>60%)",
+      "count": 240295,
+      "mean": 189.27,
+      "median": 124.63
+    }
+  ],
+  "funnel_by_tier": [
+    {
+      "minority_tier": "low(<30%)",
+      "views": 236986.0,
+      "carts": 7555.0,
+      "purchases": 3781.0,
+      "v\u2192c": 0.0319,
+      "v\u2192p": 0.016
+    },
+    {
+      "minority_tier": "high(>60%)",
+      "views": 240295.0,
+      "carts": 6106.0,
+      "purchases": 2916.0,
+      "v\u2192c": 0.0254,
+      "v\u2192p": 0.0121
+    }
+  ],
+  "disparate_impact_view_to_purchase": 0.756
+}
